@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Brunouno | Go online. Grow smarter.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Public+Sans:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#e4e1ec",
+                    "on-tertiary-fixed-variant": "#4e556f",
+                    "tertiary-fixed": "#d2d9f8",
+                    "on-surface-variant": "#605e61",
+                    "tertiary-fixed-dim": "#c4cbe9",
+                    "on-error": "#fff7f7",
+                    "outline": "#7c7a7d",
+                    "surface-container-high": "#ebe7ea",
+                    "surface-container-low": "#f7f2f4",
+                    "surface-bright": "#fcf8f9",
+                    "on-secondary": "#fcf8fc",
+                    "inverse-on-surface": "#9f9c9d",
+                    "on-primary-container": "#52515a",
+                    "on-primary-fixed-variant": "#5c5a64",
+                    "inverse-surface": "#0e0e0f",
+                    "surface-container-highest": "#e5e1e5",
+                    "inverse-primary": "#ede9f5",
+                    "on-secondary-fixed-variant": "#5c5b5f",
+                    "background": "#fcf8f9",
+                    "tertiary-container": "#d2d9f8",
+                    "secondary-fixed-dim": "#d7d3d8",
+                    "primary": "#5f5d67",
+                    "on-tertiary": "#faf8ff",
+                    "surface-container": "#f1edef",
+                    "surface-tint": "#5f5d67",
+                    "outline-variant": "#b4b1b4",
+                    "error": "#9e3f4e",
+                    "on-secondary-fixed": "#403f43",
+                    "primary-dim": "#53515a",
+                    "primary-fixed-dim": "#d6d3de",
+                    "error-dim": "#4f0116",
+                    "tertiary": "#575e78",
+                    "surface": "#fcf8f9",
+                    "secondary-fixed": "#e5e1e6",
+                    "secondary-container": "#e5e1e6",
+                    "on-surface": "#333235",
+                    "on-secondary-container": "#525155",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#444c65",
+                    "primary-fixed": "#e4e1ec",
+                    "surface-dim": "#dcd9dd",
+                    "surface-variant": "#e5e1e5",
+                    "on-error-container": "#782232",
+                    "secondary": "#605e62",
+                    "secondary-dim": "#545256",
+                    "on-background": "#333235",
+                    "on-tertiary-fixed": "#323951",
+                    "tertiary-dim": "#4b526c",
+                    "on-primary": "#faf6ff",
+                    "on-primary-fixed": "#3f3e47",
+                    "error-container": "#ff8b9a",
+                    "accent-indigo": "#4F46E5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter", "sans-serif"],
+                    "display": ["Inter", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Public Sans", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcf8f9;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        summary { list-style: none; }
+        summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="text-on-surface selection:bg-accent-indigo selection:text-white">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
+<nav class="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
+<div class="flex items-center gap-2 cursor-pointer active:scale-95 transition-transform">
+<img alt="Brunouno" class="h-16 w-auto object-contain" src="assets/brunouno-icon.png"/>
+<span class="text-4xl font-extrabold tracking-tight text-[#4F46E5]">Brunouno</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="relative">
+<button aria-label="Language" id="langBtn" class="flex items-center gap-1 px-3 h-11 rounded-full hover:bg-surface-container transition-colors active:scale-95 text-sm font-semibold text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">language</span>
+<span id="langLabel">EN</span>
+</button>
+<div id="langDropdown" class="hidden absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg border border-outline-variant/20 py-2 z-50">
+<button class="w-full text-left block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" onclick="setLanguage('en')">English</button>
+<button class="w-full text-left block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" onclick="setLanguage('zh')">中文</button>
+<button class="w-full text-left block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" onclick="setLanguage('ms')">Bahasa Melayu</button>
+</div>
+</div>
+<div class="relative">
+<button aria-label="Menu" id="navMenuBtn" class="flex items-center justify-center w-11 h-11 rounded-full hover:bg-surface-container transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant text-2xl">menu</span>
+</button>
+<div id="navMenuDropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-outline-variant/20 py-2 z-50">
+<a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" data-i18n="nav.home" href="#about">About Us</a>
+<a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" data-i18n="nav.why" href="#why">Why Us</a>
+<a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" data-i18n="nav.services" href="#services">Services</a>
+<a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" data-i18n="nav.how" href="#how">How It Works</a>
+<a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" data-i18n="nav.pricing" href="#pricing">Pricing</a>
+<a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" data-i18n="nav.testimonials" href="#testimonials">Reviews</a>
+<a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" data-i18n="nav.faq" href="#faq">FAQ</a>
+<a class="block px-4 py-2 text-sm text-on-surface-variant hover:bg-surface-container hover:text-accent-indigo transition-colors" data-i18n="nav.contact" href="#contact">Contact</a>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<script>
+document.getElementById('navMenuBtn').addEventListener('click', function (e) {
+    e.stopPropagation();
+    document.getElementById('langDropdown').classList.add('hidden');
+    document.getElementById('navMenuDropdown').classList.toggle('hidden');
+});
+document.getElementById('langBtn').addEventListener('click', function (e) {
+    e.stopPropagation();
+    document.getElementById('navMenuDropdown').classList.add('hidden');
+    document.getElementById('langDropdown').classList.toggle('hidden');
+});
+document.addEventListener('click', function () {
+    document.getElementById('navMenuDropdown').classList.add('hidden');
+    document.getElementById('langDropdown').classList.add('hidden');
+});
+</script>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-6 py-16 md:py-24 flex flex-col md:flex-row items-center gap-16">
+<div class="flex-1 space-y-8 animate-fade-in">
+<h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-on-surface leading-[1.1] mt-12 md:mt-20">
+<span data-i18n="hero.title1">Order Smarter.</span> <span class="text-accent-indigo" data-i18n="hero.title2">Pay Less.</span>
+</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed max-w-xl" data-i18n="hero.subtitle">
+                    Affordable websites, ordering systems, and digital marketing solutions for small businesses.
+                </p>
+<div class="flex items-center gap-6 pt-4">
+<a class="bg-accent-indigo text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-accent-indigo/20 transition-all active:scale-95 inline-block" data-i18n="hero.cta" href="#contact">
+                        Book a Free Consultation
+                    </a>
+</div>
+</div>
+<div class="flex-1 w-full max-w-2xl">
+<div class="relative group">
+<div class="absolute -inset-4 bg-accent-indigo/5 rounded-[2rem] blur-2xl group-hover:bg-accent-indigo/10 transition-colors"></div>
+<img alt="Brunouno Product Mockup" class="relative rounded-2xl shadow-2xl border border-outline-variant/20 w-full transform hover:scale-[1.02] transition-transform duration-500" src="assets/hero-mockup.jpg"/>
+</div>
+</div>
+</section>
+<!-- About Us Section -->
+<section class="py-24 px-6" id="about">
+<div class="max-w-3xl mx-auto text-center space-y-6">
+<h2 class="text-3xl font-bold text-on-surface" data-i18n="about.heading">About Us</h2>
+<p class="text-on-surface-variant leading-relaxed text-lg" data-i18n="about.body">
+                    Brunouno helps small businesses, hawker stalls, home-based businesses, cafés, restaurants, retail shops, and service providers go digital — without the high costs. We build affordable websites, online ordering systems, and practical digital marketing solutions designed for real businesses, not big budgets. Our mission is simple: help you reach more customers, increase profits, and grow with confidence, all while keeping more of what you earn. No high platform commissions. No expensive agency fees. Just honest pricing, fast setup, and a team that understands what small business owners actually need. Brunouno is your affordable partner for going digital and growing online.
+                </p>
+</div>
+</section>
+<!-- Why Choose Us Section -->
+<section class="bg-surface-container-lowest py-24 px-6" id="why">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<h2 class="text-3xl font-bold text-on-surface" data-i18n="why.heading">Why Choose Brunouno</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<h3 class="font-bold text-on-surface" data-i18n="why.item1.title">Affordable Pricing</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed" data-i18n="why.item1.body">Get a professional online presence without the agency price tag — built for small business budgets.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<h3 class="font-bold text-on-surface" data-i18n="why.item2.title">Fast Setup</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed" data-i18n="why.item2.body">Get your website and ordering system up and running in days, not months.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">code_off</span>
+</div>
+<h3 class="font-bold text-on-surface" data-i18n="why.item3.title">No Coding Required</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed" data-i18n="why.item3.body">We handle all the technical work, so you can focus on running your business.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">support_agent</span>
+</div>
+<h3 class="font-bold text-on-surface" data-i18n="why.item4.title">Local Support</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed" data-i18n="why.item4.body">Talk to a real person who understands your market and your customers.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">tips_and_updates</span>
+</div>
+<h3 class="font-bold text-on-surface" data-i18n="why.item5.title">Practical Marketing Advice</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed" data-i18n="why.item5.body">Get straightforward, no-jargon marketing guidance that actually drives results.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-24" id="services">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+<h2 class="text-3xl font-bold text-on-surface" data-i18n="services.heading">Our Services</h2>
+<p class="text-on-surface-variant" data-i18n="services.subheading">Everything you need to compete with the big platforms and grow on your own terms.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+<div class="space-y-6 group">
+<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo group-hover:bg-accent-indigo group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">design_services</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="services.item1.title">Website Design</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="services.item1.body">A professional, mobile-friendly website that represents your brand and turns visitors into customers.</p>
+</div>
+<div class="space-y-6 group">
+<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo group-hover:bg-accent-indigo group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">shopping_cart</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="services.item2.title">Online Ordering System</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="services.item2.body">Let customers order directly from you — no commission cuts, no third-party apps.</p>
+</div>
+<div class="space-y-6 group">
+<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo group-hover:bg-accent-indigo group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">business</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="services.item3.title">Google Business Profile Setup</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="services.item3.body">Get found on Google Search and Maps with a fully optimized business profile.</p>
+</div>
+<div class="space-y-6 group">
+<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo group-hover:bg-accent-indigo group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">campaign</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="services.item4.title">Facebook &amp; Instagram Advertising</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="services.item4.body">Targeted social media ads that put your business in front of the right customers.</p>
+</div>
+<div class="space-y-6 group">
+<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo group-hover:bg-accent-indigo group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">trending_up</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="services.item5.title">SEO Optimization</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="services.item5.body">Improve your search rankings so more customers find you online, organically.</p>
+</div>
+<div class="space-y-6 group">
+<div class="w-14 h-14 bg-primary-fixed rounded-2xl flex items-center justify-center text-accent-indigo group-hover:bg-accent-indigo group-hover:text-white transition-all">
+<span class="material-symbols-outlined text-3xl">forum</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="services.item6.title">Marketing Consultation</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="services.item6.body">One-on-one guidance to help you plan campaigns and grow your business strategically.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="bg-surface-container-lowest py-24 px-6" id="how">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<h2 class="text-3xl font-bold text-on-surface" data-i18n="how.heading">How It Works</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="text-center space-y-4">
+<div class="w-12 h-12 mx-auto bg-accent-indigo text-white rounded-full flex items-center justify-center font-bold text-lg">1</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="how.step1.title">Tell Us About Your Business</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="how.step1.body">Share your goals, your customers, and what makes your business unique.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-12 h-12 mx-auto bg-accent-indigo text-white rounded-full flex items-center justify-center font-bold text-lg">2</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="how.step2.title">We Build Your Digital Presence</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="how.step2.body">Our team designs your website, ordering system, and marketing setup — fast and affordable.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-12 h-12 mx-auto bg-accent-indigo text-white rounded-full flex items-center justify-center font-bold text-lg">3</div>
+<h3 class="text-xl font-bold text-on-surface" data-i18n="how.step3.title">You Grow Your Business</h3>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="how.step3.body">Go live, attract more customers, and watch your business grow online.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="py-24 px-6">
+<div class="max-w-5xl mx-auto bg-on-surface rounded-[2.5rem] p-12 md:p-20 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-accent-indigo/20 blur-[100px] rounded-full"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-indigo/10 blur-[80px] rounded-full"></div>
+<div class="relative z-10">
+<h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12" data-i18n="benefits.heading">Benefits</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-accent-indigo/20 rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">groups</span>
+</div>
+<h3 class="font-bold text-white" data-i18n="benefits.item1.title">More Customers</h3>
+<p class="text-sm text-outline-variant leading-relaxed" data-i18n="benefits.item1.body">Reach new customers actively searching for businesses like yours.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-accent-indigo/20 rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">shopping_bag</span>
+</div>
+<h3 class="font-bold text-white" data-i18n="benefits.item2.title">More Orders</h3>
+<p class="text-sm text-outline-variant leading-relaxed" data-i18n="benefits.item2.body">A seamless ordering experience that turns visits into sales.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-accent-indigo/20 rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<h3 class="font-bold text-white" data-i18n="benefits.item3.title">More Profit</h3>
+<p class="text-sm text-outline-variant leading-relaxed" data-i18n="benefits.item3.body">Keep more of what you earn with no high commission cuts.</p>
+</div>
+<div class="text-center space-y-4">
+<div class="w-14 h-14 mx-auto bg-accent-indigo/20 rounded-2xl flex items-center justify-center text-accent-indigo">
+<span class="material-symbols-outlined text-3xl">shield</span>
+</div>
+<h3 class="font-bold text-white" data-i18n="benefits.item4.title">Full Control of Your Brand</h3>
+<p class="text-sm text-outline-variant leading-relaxed" data-i18n="benefits.item4.body">Your website, your data, your customers — owned by you, not a platform.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="bg-surface-container-lowest py-24 px-6" id="pricing">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+<h2 class="text-3xl font-bold text-on-surface" data-i18n="pricing.heading">Pricing Plans</h2>
+<p class="text-on-surface-variant" data-i18n="pricing.subheading">From entry-level to advanced, there's a plan that fits your business.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Starter -->
+<div class="bg-white rounded-3xl border border-outline-variant/20 p-8 space-y-6">
+<div>
+<h3 class="text-lg font-bold text-on-surface" data-i18n="pricing.tier1.name">Starter</h3>
+<p class="text-sm text-on-surface-variant mt-1" data-i18n="pricing.tier1.tagline">For hawker stalls & home-based businesses just getting started online.</p>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-on-surface" data-i18n="pricing.tier1.price">$99</span>
+<span class="text-on-surface-variant" data-i18n="pricing.tier1.period">/month</span>
+</div>
+<ul class="space-y-3 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier1.f1">1-page mobile-friendly website</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier1.f2">WhatsApp / online ordering link</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier1.f3">Google Business Profile setup</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier1.f4">Basic support</span></li>
+</ul>
+<a class="block text-center bg-surface-container text-on-surface px-6 py-3 rounded-xl font-bold hover:bg-surface-container-high transition-colors" data-i18n="pricing.tier1.cta" href="#contact">Get Started</a>
+</div>
+<!-- Growth -->
+<div class="bg-on-surface rounded-3xl p-8 space-y-6 lg:-translate-y-4 shadow-2xl relative">
+<span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent-indigo text-white text-xs font-bold px-4 py-1 rounded-full" data-i18n="pricing.tier2.badge">Most Popular</span>
+<div>
+<h3 class="text-lg font-bold text-white" data-i18n="pricing.tier2.name">Growth</h3>
+<p class="text-sm text-outline-variant mt-1" data-i18n="pricing.tier2.tagline">For cafés, restaurants & retail shops ready to grow online.</p>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-white" data-i18n="pricing.tier2.price">$249</span>
+<span class="text-outline-variant" data-i18n="pricing.tier2.period">/month</span>
+</div>
+<ul class="space-y-3 text-sm text-outline-variant">
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier2.f1">Everything in Starter</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier2.f2">Full website (up to 5 pages)</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier2.f3">Online ordering system</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier2.f4">Social media setup (FB &amp; IG)</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier2.f5">Basic SEO optimization</span></li>
+</ul>
+<a class="block text-center bg-accent-indigo text-white px-6 py-3 rounded-xl font-bold hover:opacity-90 transition-opacity" data-i18n="pricing.tier2.cta" href="#contact">Get Started</a>
+</div>
+<!-- Pro -->
+<div class="bg-white rounded-3xl border border-outline-variant/20 p-8 space-y-6">
+<div>
+<h3 class="text-lg font-bold text-on-surface" data-i18n="pricing.tier3.name">Pro</h3>
+<p class="text-sm text-on-surface-variant mt-1" data-i18n="pricing.tier3.tagline">For businesses ready to scale with full marketing support.</p>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-extrabold text-on-surface" data-i18n="pricing.tier3.price">$499</span>
+<span class="text-on-surface-variant" data-i18n="pricing.tier3.period">/month</span>
+</div>
+<ul class="space-y-3 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier3.f1">Everything in Growth</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier3.f2">Facebook &amp; Instagram ad management</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier3.f3">Advanced SEO optimization</span></li>
+<li class="flex items-start gap-2"><span class="material-symbols-outlined text-accent-indigo text-lg">check_circle</span><span data-i18n="pricing.tier3.f4">Monthly marketing consultation</span></li>
+</ul>
+<a class="block text-center bg-surface-container text-on-surface px-6 py-3 rounded-xl font-bold hover:bg-surface-container-high transition-colors" data-i18n="pricing.tier3.cta" href="#contact">Get Started</a>
+</div>
+</div>
+<p class="text-center text-sm text-on-surface-variant/70 mt-10" data-i18n="pricing.note">Prices shown are illustrative starting points — customize them to your market and currency.</p>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-24 px-6" id="testimonials">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<h2 class="text-3xl font-bold text-on-surface" data-i18n="testimonials.heading">What Our Customers Say</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="bg-white rounded-2xl border border-outline-variant/20 p-8 space-y-4">
+<div class="flex gap-0.5 text-accent-indigo"><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span></div>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="testimonials.item1.quote">Brunouno helped me get an online ordering system without paying crazy commission fees. My regulars order ahead now and I save so much time during lunch rush.</p>
+<div>
+<p class="font-bold text-on-surface" data-i18n="testimonials.item1.name">Mr. Tan</p>
+<p class="text-sm text-on-surface-variant" data-i18n="testimonials.item1.business">Tan's Wonton Noodles (Hawker Stall)</p>
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-outline-variant/20 p-8 space-y-4">
+<div class="flex gap-0.5 text-accent-indigo"><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span></div>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="testimonials.item2.quote">I never thought I needed a website until Brunouno built me one in just a few days. Now strangers find me on Google and place orders before I even open!</p>
+<div>
+<p class="font-bold text-on-surface" data-i18n="testimonials.item2.name">Siti</p>
+<p class="text-sm text-on-surface-variant" data-i18n="testimonials.item2.business">Siti's Kitchen (Home-Based)</p>
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-outline-variant/20 p-8 space-y-4">
+<div class="flex gap-0.5 text-accent-indigo"><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span></div>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="testimonials.item3.quote">Our Instagram ads finally make sense. Brunouno set everything up and explained it in plain English — no confusing jargon, just real results.</p>
+<div>
+<p class="font-bold text-on-surface" data-i18n="testimonials.item3.name">Marcus</p>
+<p class="text-sm text-on-surface-variant" data-i18n="testimonials.item3.business">The Daily Grind Café</p>
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-outline-variant/20 p-8 space-y-4">
+<div class="flex gap-0.5 text-accent-indigo"><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span></div>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="testimonials.item4.quote">We went from a Facebook page to a real online store. Brunouno's team made the whole process painless, and our online orders have tripled.</p>
+<div>
+<p class="font-bold text-on-surface" data-i18n="testimonials.item4.name">Priya</p>
+<p class="text-sm text-on-surface-variant" data-i18n="testimonials.item4.business">Priya's Boutique (Retail)</p>
+</div>
+</div>
+<div class="bg-white rounded-2xl border border-outline-variant/20 p-8 space-y-4">
+<div class="flex gap-0.5 text-accent-indigo"><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span><span class="material-symbols-outlined text-lg">star</span></div>
+<p class="text-on-surface-variant leading-relaxed" data-i18n="testimonials.item5.quote">Customers can finally find us on Google Maps and book appointments online. Brunouno made digital so much less intimidating.</p>
+<div>
+<p class="font-bold text-on-surface" data-i18n="testimonials.item5.name">Aisha</p>
+<p class="text-sm text-on-surface-variant" data-i18n="testimonials.item5.business">Glow Beauty Studio</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="bg-surface-container-lowest py-24 px-6" id="faq">
+<div class="max-w-3xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="text-3xl font-bold text-on-surface" data-i18n="faq.heading">Frequently Asked Questions</h2>
+</div>
+<div class="space-y-4">
+<details class="group bg-white rounded-2xl border border-outline-variant/20 p-6">
+<summary class="flex justify-between items-center cursor-pointer font-bold text-on-surface gap-4">
+<span data-i18n="faq.item1.q">Do I need coding knowledge?</span>
+<span class="material-symbols-outlined text-accent-indigo transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+</summary>
+<p class="text-on-surface-variant leading-relaxed mt-4" data-i18n="faq.item1.a">Not at all. We handle all the technical work for you — you just tell us what you need, and we build it.</p>
+</details>
+<details class="group bg-white rounded-2xl border border-outline-variant/20 p-6">
+<summary class="flex justify-between items-center cursor-pointer font-bold text-on-surface gap-4">
+<span data-i18n="faq.item2.q">How long does setup take?</span>
+<span class="material-symbols-outlined text-accent-indigo transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+</summary>
+<p class="text-on-surface-variant leading-relaxed mt-4" data-i18n="faq.item2.a">Most websites and ordering systems are ready within 5–10 business days, depending on the package you choose.</p>
+</details>
+<details class="group bg-white rounded-2xl border border-outline-variant/20 p-6">
+<summary class="flex justify-between items-center cursor-pointer font-bold text-on-surface gap-4">
+<span data-i18n="faq.item3.q">Can you migrate my existing website?</span>
+<span class="material-symbols-outlined text-accent-indigo transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+</summary>
+<p class="text-on-surface-variant leading-relaxed mt-4" data-i18n="faq.item3.a">Yes! We can migrate your existing content and design into a faster, more affordable, mobile-friendly website.</p>
+</details>
+<details class="group bg-white rounded-2xl border border-outline-variant/20 p-6">
+<summary class="flex justify-between items-center cursor-pointer font-bold text-on-surface gap-4">
+<span data-i18n="faq.item4.q">How much does it cost?</span>
+<span class="material-symbols-outlined text-accent-indigo transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+</summary>
+<p class="text-on-surface-variant leading-relaxed mt-4" data-i18n="faq.item4.a">Our plans start from an affordable monthly rate with no hidden fees. Check out our Pricing section above for full details.</p>
+</details>
+<details class="group bg-white rounded-2xl border border-outline-variant/20 p-6">
+<summary class="flex justify-between items-center cursor-pointer font-bold text-on-surface gap-4">
+<span data-i18n="faq.item5.q">What support do you provide?</span>
+<span class="material-symbols-outlined text-accent-indigo transition-transform group-open:rotate-180 flex-shrink-0">expand_more</span>
+</summary>
+<p class="text-on-surface-variant leading-relaxed mt-4" data-i18n="faq.item5.a">You'll have access to real local support — by phone, WhatsApp, or email — whenever you need help.</p>
+</details>
+</div>
+</div>
+</section>
+<!-- Final CTA / Contact Section -->
+<section class="py-24 px-6" id="contact">
+<div class="max-w-5xl mx-auto bg-on-surface rounded-[2.5rem] p-8 md:p-16 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-accent-indigo/20 blur-[100px] rounded-full"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-accent-indigo/10 blur-[80px] rounded-full"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="text-center lg:text-left space-y-6">
+<h2 class="text-3xl md:text-4xl font-bold text-white" data-i18n="contact.heading">Ready to Grow Your Business Online?</h2>
+<p class="text-outline-variant text-lg" data-i18n="contact.subheading">Book a free consultation and let's build an affordable digital presence that helps your business grow — no commitment required.</p>
+</div>
+<div>
+<form class="bg-white rounded-2xl p-6 md:p-8 space-y-4" id="contactForm">
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1" data-i18n="contact.form.name" for="cf-name">Name</label>
+<input class="w-full rounded-xl border border-outline-variant/40 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-indigo" id="cf-name" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1" data-i18n="contact.form.business" for="cf-business">Business Name</label>
+<input class="w-full rounded-xl border border-outline-variant/40 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-indigo" id="cf-business" type="text"/>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1" data-i18n="contact.form.email" for="cf-email">Email</label>
+<input class="w-full rounded-xl border border-outline-variant/40 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-indigo" id="cf-email" required="" type="email"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1" data-i18n="contact.form.phone" for="cf-phone">Phone Number</label>
+<input class="w-full rounded-xl border border-outline-variant/40 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-indigo" id="cf-phone" type="tel"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1" data-i18n="contact.form.message" for="cf-message">Message</label>
+<textarea class="w-full rounded-xl border border-outline-variant/40 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-indigo" id="cf-message" rows="3"></textarea>
+</div>
+<button class="w-full bg-accent-indigo text-white px-6 py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-opacity active:scale-95" data-i18n="contact.form.submit" type="submit">Book My Free Consultation</button>
+<p class="text-xs text-on-surface-variant text-center" data-i18n="contact.note">We'll get back to you within 1 business day.</p>
+</form>
+<div class="hidden bg-white rounded-2xl p-8 text-center space-y-2" id="contactThanks">
+<span class="material-symbols-outlined text-accent-indigo text-4xl">check_circle</span>
+<p class="font-bold text-on-surface" data-i18n="contact.thanks">Thanks! We've received your details and will be in touch soon.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface border-t border-outline-variant/30 py-16">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+<div class="col-span-2 md:col-span-1 space-y-6">
+<div class="flex items-center gap-2">
+<img alt="Brunouno" class="h-12 w-auto object-contain" src="assets/brunouno-icon.png"/>
+<span class="text-3xl font-extrabold tracking-tight text-[#4F46E5]">Brunouno</span>
+</div>
+<p class="text-on-surface-variant/80 text-sm leading-relaxed" data-i18n="footer.tagline">
+                        Bringing Every Business Online. Helping you achieve more with less noise.
+                    </p>
+<a class="block text-sm font-semibold text-accent-indigo hover:opacity-80 transition-opacity" href="mailto:hello@brunouno.com">hello@brunouno.com</a>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-on-surface text-sm uppercase tracking-wider" data-i18n="footer.product">Product</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.prod.features" href="#services">Services</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.prod.integrations" href="#how">How It Works</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.prod.pricing" href="#pricing">Pricing</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-on-surface text-sm uppercase tracking-wider" data-i18n="footer.company">Company</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.company.about" href="#about">About</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.company.careers" href="#">Careers</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.company.contact" href="mailto:hello@brunouno.com">Contact</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-on-surface text-sm uppercase tracking-wider" data-i18n="footer.legal">Legal</h4>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.legal.terms" href="#">Terms</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.legal.privacy" href="#">Privacy</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-accent-indigo text-sm transition-colors" data-i18n="footer.legal.security" href="#">Security</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-on-surface-variant/60 text-sm" data-i18n="footer.copyright">© 2024 Brunouno Inc. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-on-surface-variant/60 hover:text-accent-indigo transition-colors" href="#"><span class="material-symbols-outlined">language</span></a>
+<a class="text-on-surface-variant/60 hover:text-accent-indigo transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple intersection observer for reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+<script>
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            document.getElementById('contactForm').classList.add('hidden');
+            document.getElementById('contactThanks').classList.remove('hidden');
+        });
+    </script>
+<script>
+        const translations = {
+            en: {
+                nav: { home: "About Us", why: "Why Us", services: "Services", how: "How It Works", pricing: "Pricing", testimonials: "Reviews", faq: "FAQ", contact: "Contact" },
+                hero: {
+                    title1: "Order Smarter.",
+                    title2: "Pay Less.",
+                    subtitle: "Affordable websites, ordering systems, and digital marketing solutions for small businesses.",
+                    cta: "Book a Free Consultation"
+                },
+                about: {
+                    heading: "About Us",
+                    body: "Brunouno helps small businesses, hawker stalls, home-based businesses, cafés, restaurants, retail shops, and service providers go digital — without the high costs. We build affordable websites, online ordering systems, and practical digital marketing solutions designed for real businesses, not big budgets. Our mission is simple: help you reach more customers, increase profits, and grow with confidence, all while keeping more of what you earn. No high platform commissions. No expensive agency fees. Just honest pricing, fast setup, and a team that understands what small business owners actually need. Brunouno is your affordable partner for going digital and growing online."
+                },
+                why: {
+                    heading: "Why Choose Brunouno",
+                    item1: { title: "Affordable Pricing", body: "Get a professional online presence without the agency price tag — built for small business budgets." },
+                    item2: { title: "Fast Setup", body: "Get your website and ordering system up and running in days, not months." },
+                    item3: { title: "No Coding Required", body: "We handle all the technical work, so you can focus on running your business." },
+                    item4: { title: "Local Support", body: "Talk to a real person who understands your market and your customers." },
+                    item5: { title: "Practical Marketing Advice", body: "Get straightforward, no-jargon marketing guidance that actually drives results." }
+                },
+                services: {
+                    heading: "Our Services",
+                    subheading: "Everything you need to compete with the big platforms and grow on your own terms.",
+                    item1: { title: "Website Design", body: "A professional, mobile-friendly website that represents your brand and turns visitors into customers." },
+                    item2: { title: "Online Ordering System", body: "Let customers order directly from you — no commission cuts, no third-party apps." },
+                    item3: { title: "Google Business Profile Setup", body: "Get found on Google Search and Maps with a fully optimized business profile." },
+                    item4: { title: "Facebook & Instagram Advertising", body: "Targeted social media ads that put your business in front of the right customers." },
+                    item5: { title: "SEO Optimization", body: "Improve your search rankings so more customers find you online, organically." },
+                    item6: { title: "Marketing Consultation", body: "One-on-one guidance to help you plan campaigns and grow your business strategically." }
+                },
+                how: {
+                    heading: "How It Works",
+                    step1: { title: "Tell Us About Your Business", body: "Share your goals, your customers, and what makes your business unique." },
+                    step2: { title: "We Build Your Digital Presence", body: "Our team designs your website, ordering system, and marketing setup — fast and affordable." },
+                    step3: { title: "You Grow Your Business", body: "Go live, attract more customers, and watch your business grow online." }
+                },
+                benefits: {
+                    heading: "Benefits",
+                    item1: { title: "More Customers", body: "Reach new customers actively searching for businesses like yours." },
+                    item2: { title: "More Orders", body: "A seamless ordering experience that turns visits into sales." },
+                    item3: { title: "More Profit", body: "Keep more of what you earn with no high commission cuts." },
+                    item4: { title: "Full Control of Your Brand", body: "Your website, your data, your customers — owned by you, not a platform." }
+                },
+                pricing: {
+                    heading: "Pricing Plans",
+                    subheading: "From entry-level to advanced, there's a plan that fits your business.",
+                    tier1: {
+                        name: "Starter", tagline: "For hawker stalls & home-based businesses just getting started online.",
+                        price: "$99", period: "/month",
+                        f1: "1-page mobile-friendly website", f2: "WhatsApp / online ordering link", f3: "Google Business Profile setup", f4: "Basic support",
+                        cta: "Get Started"
+                    },
+                    tier2: {
+                        name: "Growth", badge: "Most Popular", tagline: "For cafés, restaurants & retail shops ready to grow online.",
+                        price: "$249", period: "/month",
+                        f1: "Everything in Starter", f2: "Full website (up to 5 pages)", f3: "Online ordering system", f4: "Social media setup (FB & IG)", f5: "Basic SEO optimization",
+                        cta: "Get Started"
+                    },
+                    tier3: {
+                        name: "Pro", tagline: "For businesses ready to scale with full marketing support.",
+                        price: "$499", period: "/month",
+                        f1: "Everything in Growth", f2: "Facebook & Instagram ad management", f3: "Advanced SEO optimization", f4: "Monthly marketing consultation",
+                        cta: "Get Started"
+                    },
+                    note: "Prices shown are illustrative starting points — customize them to your market and currency."
+                },
+                testimonials: {
+                    heading: "What Our Customers Say",
+                    item1: { quote: "Brunouno helped me get an online ordering system without paying crazy commission fees. My regulars order ahead now and I save so much time during lunch rush.", name: "Mr. Tan", business: "Tan's Wonton Noodles (Hawker Stall)" },
+                    item2: { quote: "I never thought I needed a website until Brunouno built me one in just a few days. Now strangers find me on Google and place orders before I even open!", name: "Siti", business: "Siti's Kitchen (Home-Based)" },
+                    item3: { quote: "Our Instagram ads finally make sense. Brunouno set everything up and explained it in plain English — no confusing jargon, just real results.", name: "Marcus", business: "The Daily Grind Café" },
+                    item4: { quote: "We went from a Facebook page to a real online store. Brunouno's team made the whole process painless, and our online orders have tripled.", name: "Priya", business: "Priya's Boutique (Retail)" },
+                    item5: { quote: "Customers can finally find us on Google Maps and book appointments online. Brunouno made digital so much less intimidating.", name: "Aisha", business: "Glow Beauty Studio" }
+                },
+                faq: {
+                    heading: "Frequently Asked Questions",
+                    item1: { q: "Do I need coding knowledge?", a: "Not at all. We handle all the technical work for you — you just tell us what you need, and we build it." },
+                    item2: { q: "How long does setup take?", a: "Most websites and ordering systems are ready within 5–10 business days, depending on the package you choose." },
+                    item3: { q: "Can you migrate my existing website?", a: "Yes! We can migrate your existing content and design into a faster, more affordable, mobile-friendly website." },
+                    item4: { q: "How much does it cost?", a: "Our plans start from an affordable monthly rate with no hidden fees. Check out our Pricing section above for full details." },
+                    item5: { q: "What support do you provide?", a: "You'll have access to real local support — by phone, WhatsApp, or email — whenever you need help." }
+                },
+                contact: {
+                    heading: "Ready to Grow Your Business Online?",
+                    subheading: "Book a free consultation and let's build an affordable digital presence that helps your business grow — no commitment required.",
+                    form: { name: "Name", business: "Business Name", email: "Email", phone: "Phone Number", message: "Message", submit: "Book My Free Consultation" },
+                    note: "We'll get back to you within 1 business day.",
+                    thanks: "Thanks! We've received your details and will be in touch soon."
+                },
+                footer: {
+                    tagline: "Bringing Every Business Online. Helping you achieve more with less noise.",
+                    product: "Product", company: "Company", legal: "Legal",
+                    prod: { features: "Services", integrations: "How It Works", pricing: "Pricing" },
+                    companyLinks: { about: "About", careers: "Careers", contact: "Contact" },
+                    legalLinks: { terms: "Terms", privacy: "Privacy", security: "Security" },
+                    copyright: "© 2024 Brunouno Inc. All rights reserved."
+                }
+            },
+            zh: {
+                nav: { home: "关于我们", why: "为何选择", services: "服务项目", how: "运作流程", pricing: "价格方案", testimonials: "客户评价", faq: "常见问题", contact: "联系我们" },
+                hero: {
+                    title1: "智慧下单。",
+                    title2: "省更多钱。",
+                    subtitle: "为小型企业提供平价网站、订购系统与实用数字营销方案。",
+                    cta: "预约免费咨询"
+                },
+                about: {
+                    heading: "关于我们",
+                    body: "Brunouno 致力于帮助小贩摊位、居家创业者、咖啡馆、餐厅、零售店及服务业者实现数字化转型——无需承担高昂成本。我们打造平价网站、在线订购系统与实用的数字营销方案，专为真实的中小企业而设计，而非大预算企业。我们的使命很简单：帮助您触达更多顾客、提升利润，并自信地成长，同时保留更多您应得的收入。无需支付高额平台佣金，也无需承担昂贵的代理费用。只需诚实的定价、快速的搭建速度，以及真正了解小企业主需求的团队。Brunouno 是您数字化转型与线上成长的平价合作伙伴。"
+                },
+                why: {
+                    heading: "为何选择 Brunouno",
+                    item1: { title: "平价收费", body: "以小型企业可承受的预算，获得专业的线上形象，无需支付代理公司的高昂费用。" },
+                    item2: { title: "快速搭建", body: "几天内即可上线您的网站与订购系统，无需等待数月。" },
+                    item3: { title: "无需编程", body: "所有技术工作由我们处理，您只需专注经营业务。" },
+                    item4: { title: "本地支持", body: "与真正了解您市场与顾客的真人团队沟通。" },
+                    item5: { title: "实用营销建议", body: "获取直白、无术语的营销指导，真正带来成效。" }
+                },
+                services: {
+                    heading: "服务项目",
+                    subheading: "助您与大型平台竞争，按自己的方式成长所需的一切。",
+                    item1: { title: "网站设计", body: "专业、适配手机的网站，展现您的品牌并将访客转化为顾客。" },
+                    item2: { title: "在线订购系统", body: "让顾客直接向您下单——无佣金抽成，无需第三方应用。" },
+                    item3: { title: "Google 商家资料设置", body: "通过完整优化的商家资料，让顾客在 Google 搜索与地图中找到您。" },
+                    item4: { title: "Facebook 与 Instagram 广告", body: "精准社媒广告投放，让您的业务出现在合适顾客眼前。" },
+                    item5: { title: "SEO 优化", body: "提升搜索排名，让更多顾客自然地在线上找到您。" },
+                    item6: { title: "营销咨询", body: "一对一指导，助您有策略地规划营销活动并发展业务。" }
+                },
+                how: {
+                    heading: "运作流程",
+                    step1: { title: "第一步：告诉我们您的业务", body: "分享您的目标、顾客群体，以及您业务的独特之处。" },
+                    step2: { title: "第二步：我们打造您的数字形象", body: "我们的团队为您设计网站、订购系统与营销方案——快速且平价。" },
+                    step3: { title: "第三步：您的业务持续成长", body: "正式上线，吸引更多顾客，见证您的业务线上成长。" }
+                },
+                benefits: {
+                    heading: "核心优势",
+                    item1: { title: "更多顾客", body: "触达正在搜索像您这样的业务的全新顾客群体。" },
+                    item2: { title: "更多订单", body: "流畅的下单体验，将访客转化为实际销售。" },
+                    item3: { title: "更多利润", body: "无需支付高额佣金，保留更多您应得的收入。" },
+                    item4: { title: "完全掌控您的品牌", body: "您的网站、数据与顾客——归您所有，而非平台所有。" }
+                },
+                pricing: {
+                    heading: "价格方案",
+                    subheading: "从入门到进阶，总有适合您业务的方案。",
+                    tier1: {
+                        name: "入门版", tagline: "适合刚起步上线的小贩摊位与居家创业者。",
+                        price: "$99", period: "/月",
+                        f1: "单页手机适配网站", f2: "WhatsApp / 在线订购链接", f3: "Google 商家资料设置", f4: "基础客服支持",
+                        cta: "立即开始"
+                    },
+                    tier2: {
+                        name: "成长版", badge: "最受欢迎", tagline: "适合准备线上成长的咖啡馆、餐厅与零售店。",
+                        price: "$249", period: "/月",
+                        f1: "包含入门版所有内容", f2: "完整网站（最多 5 个页面）", f3: "在线订购系统", f4: "社媒账号设置（FB 与 IG）", f5: "基础 SEO 优化",
+                        cta: "立即开始"
+                    },
+                    tier3: {
+                        name: "专业版", tagline: "适合准备全面扩展营销的企业。",
+                        price: "$499", period: "/月",
+                        f1: "包含成长版所有内容", f2: "Facebook 与 Instagram 广告投放管理", f3: "进阶 SEO 优化", f4: "每月营销咨询",
+                        cta: "立即开始"
+                    },
+                    note: "以上价格为起始参考价，可根据您的市场与货币需求调整。"
+                },
+                testimonials: {
+                    heading: "客户评价",
+                    item1: { quote: "Brunouno 帮我搭建了在线订购系统，而且不收高额佣金。现在熟客都能提前下单，午餐高峰期省了好多时间。", name: "陈先生", business: "陈氏云吞面（小贩摊位）" },
+                    item2: { quote: "我从没想过自己需要一个网站，直到 Brunouno 几天内就为我搭建好了。现在素不相识的顾客都能在 Google 上找到我，还没开门就有人下单！", name: "Siti", business: "Siti 的厨房（居家创业）" },
+                    item3: { quote: "我们的 Instagram 广告终于有效果了。Brunouno 把一切都设置好，还用简单易懂的方式讲解——没有复杂术语，只有真实成效。", name: "Marcus", business: "The Daily Grind 咖啡馆" },
+                    item4: { quote: "我们从一个 Facebook 主页变成了真正的网店。Brunouno 团队让整个过程毫不费力，线上订单量翻了三倍。", name: "Priya", business: "Priya 精品店（零售）" },
+                    item5: { quote: "顾客终于能在 Google 地图上找到我们，并在线预约。Brunouno 让数字化变得一点也不可怕。", name: "Aisha", business: "Glow Beauty Studio（美容院）" }
+                },
+                faq: {
+                    heading: "常见问题",
+                    item1: { q: "我需要懂编程吗？", a: "完全不需要。所有技术工作都由我们处理——您只需告诉我们需求，我们负责搭建。" },
+                    item2: { q: "搭建需要多长时间？", a: "大多数网站与订购系统会在 5 至 10 个工作日内完成，具体取决于您选择的方案。" },
+                    item3: { q: "你们能迁移我现有的网站吗？", a: "可以！我们能将您现有的内容与设计迁移到更快、更平价、适配手机的新网站上。" },
+                    item4: { q: "费用是多少？", a: "我们的方案从平价的月费起，无任何隐藏费用。详情请参阅上方的价格方案部分。" },
+                    item5: { q: "你们提供哪些支持？", a: "您可随时通过电话、WhatsApp 或电邮联系真人本地团队获取帮助。" }
+                },
+                contact: {
+                    heading: "准备好让您的业务线上成长了吗？",
+                    subheading: "预约一次免费咨询，让我们为您打造平价的数字形象，助您的业务成长——无需任何承诺。",
+                    form: { name: "姓名", business: "业务名称", email: "电子邮箱", phone: "联系电话", message: "留言", submit: "预约免费咨询" },
+                    note: "我们将在 1 个工作日内与您联系。",
+                    thanks: "谢谢！我们已收到您的信息，将尽快与您联系。"
+                },
+                footer: {
+                    tagline: "让每个企业都能上线经营。助您事半功倍。",
+                    product: "产品", company: "公司", legal: "法律",
+                    prod: { features: "服务项目", integrations: "运作流程", pricing: "价格方案" },
+                    companyLinks: { about: "关于我们", careers: "招聘", contact: "联系我们" },
+                    legalLinks: { terms: "条款", privacy: "隐私", security: "安全" },
+                    copyright: "© 2024 Brunouno Inc. 保留所有权利。"
+                }
+            },
+            ms: {
+                nav: { home: "Tentang Kami", why: "Kenapa Kami", services: "Perkhidmatan", how: "Cara Ia Berfungsi", pricing: "Harga", testimonials: "Testimoni", faq: "Soalan Lazim", contact: "Hubungi Kami" },
+                hero: {
+                    title1: "Pesan Lebih Bijak.",
+                    title2: "Bayar Lebih Sedikit.",
+                    subtitle: "Laman web, sistem pesanan, dan penyelesaian pemasaran digital yang berpatutan untuk perniagaan kecil.",
+                    cta: "Tempah Konsultasi Percuma"
+                },
+                about: {
+                    heading: "Tentang Kami",
+                    body: "Brunouno membantu perniagaan kecil, gerai penjaja, perniagaan berasaskan rumah, kafe, restoran, kedai runcit, dan penyedia perkhidmatan untuk go digital — tanpa kos yang tinggi. Kami membina laman web yang berpatutan, sistem pesanan dalam talian, dan penyelesaian pemasaran digital praktikal yang direka untuk perniagaan sebenar, bukan untuk bajet besar. Misi kami mudah: membantu anda menjangkau lebih ramai pelanggan, meningkatkan keuntungan, dan berkembang dengan yakin, sambil mengekalkan lebih banyak pendapatan anda. Tiada komisen platform yang tinggi. Tiada yuran agensi yang mahal. Hanya harga yang ikhlas, persediaan pantas, dan pasukan yang benar-benar memahami keperluan pemilik perniagaan kecil. Brunouno adalah rakan kongsi berpatutan anda untuk go digital dan berkembang dalam talian."
+                },
+                why: {
+                    heading: "Kenapa Pilih Brunouno",
+                    item1: { title: "Harga Berpatutan", body: "Dapatkan kehadiran dalam talian profesional tanpa harga agensi — direka untuk bajet perniagaan kecil." },
+                    item2: { title: "Persediaan Pantas", body: "Laman web dan sistem pesanan anda siap dalam beberapa hari, bukan bulan." },
+                    item3: { title: "Tanpa Pengkodan", body: "Kami uruskan semua kerja teknikal, supaya anda boleh fokus menguruskan perniagaan." },
+                    item4: { title: "Sokongan Tempatan", body: "Berbual dengan orang sebenar yang memahami pasaran dan pelanggan anda." },
+                    item5: { title: "Nasihat Pemasaran Praktikal", body: "Dapatkan panduan pemasaran yang mudah difahami dan benar-benar memberi hasil." }
+                },
+                services: {
+                    heading: "Perkhidmatan Kami",
+                    subheading: "Semua yang anda perlukan untuk bersaing dengan platform besar dan berkembang mengikut cara anda sendiri.",
+                    item1: { title: "Reka Bentuk Laman Web", body: "Laman web profesional dan mesra mudah alih yang mewakili jenama anda dan menukar pelawat kepada pelanggan." },
+                    item2: { title: "Sistem Pesanan Dalam Talian", body: "Biarkan pelanggan membuat pesanan terus daripada anda — tanpa potongan komisen, tanpa aplikasi pihak ketiga." },
+                    item3: { title: "Persediaan Profil Perniagaan Google", body: "Mudah ditemui di Carian Google dan Maps dengan profil perniagaan yang dioptimumkan sepenuhnya." },
+                    item4: { title: "Pengiklanan Facebook & Instagram", body: "Iklan media sosial yang disasarkan untuk meletakkan perniagaan anda di hadapan pelanggan yang tepat." },
+                    item5: { title: "Pengoptimuman SEO", body: "Tingkatkan kedudukan carian anda supaya lebih ramai pelanggan menemui anda secara organik." },
+                    item6: { title: "Konsultasi Pemasaran", body: "Bimbingan secara peribadi untuk membantu anda merancang kempen dan mengembangkan perniagaan secara strategik." }
+                },
+                how: {
+                    heading: "Cara Ia Berfungsi",
+                    step1: { title: "Langkah 1: Beritahu Kami Tentang Perniagaan Anda", body: "Kongsikan matlamat, pelanggan, dan apa yang menjadikan perniagaan anda unik." },
+                    step2: { title: "Langkah 2: Kami Membina Kehadiran Digital Anda", body: "Pasukan kami mereka laman web, sistem pesanan, dan persediaan pemasaran anda — pantas dan berpatutan." },
+                    step3: { title: "Langkah 3: Anda Mengembangkan Perniagaan Anda", body: "Lancarkan, tarik lebih ramai pelanggan, dan lihat perniagaan anda berkembang dalam talian." }
+                },
+                benefits: {
+                    heading: "Faedah Utama",
+                    item1: { title: "Lebih Ramai Pelanggan", body: "Jangkau pelanggan baharu yang sedang mencari perniagaan seperti anda." },
+                    item2: { title: "Lebih Banyak Pesanan", body: "Pengalaman membuat pesanan yang lancar, menukar lawatan kepada jualan." },
+                    item3: { title: "Lebih Banyak Keuntungan", body: "Kekalkan lebih banyak pendapatan anda tanpa potongan komisen yang tinggi." },
+                    item4: { title: "Kawalan Penuh Jenama Anda", body: "Laman web, data, dan pelanggan anda — dimiliki oleh anda, bukan platform." }
+                },
+                pricing: {
+                    heading: "Pelan Harga",
+                    subheading: "Daripada peringkat permulaan hingga lanjutan, ada pelan yang sesuai untuk perniagaan anda.",
+                    tier1: {
+                        name: "Permulaan", tagline: "Untuk gerai penjaja & perniagaan berasaskan rumah yang baru bermula dalam talian.",
+                        price: "$99", period: "/bulan",
+                        f1: "Laman web satu halaman mesra mudah alih", f2: "Pautan pesanan WhatsApp / dalam talian", f3: "Persediaan Profil Perniagaan Google", f4: "Sokongan asas",
+                        cta: "Mulakan Sekarang"
+                    },
+                    tier2: {
+                        name: "Pertumbuhan", badge: "Paling Popular", tagline: "Untuk kafe, restoran & kedai runcit yang bersedia berkembang dalam talian.",
+                        price: "$249", period: "/bulan",
+                        f1: "Semua dalam pelan Permulaan", f2: "Laman web penuh (sehingga 5 halaman)", f3: "Sistem pesanan dalam talian", f4: "Persediaan media sosial (FB & IG)", f5: "Pengoptimuman SEO asas",
+                        cta: "Mulakan Sekarang"
+                    },
+                    tier3: {
+                        name: "Pro", tagline: "Untuk perniagaan yang bersedia mengembangkan sokongan pemasaran penuh.",
+                        price: "$499", period: "/bulan",
+                        f1: "Semua dalam pelan Pertumbuhan", f2: "Pengurusan iklan Facebook & Instagram", f3: "Pengoptimuman SEO lanjutan", f4: "Konsultasi pemasaran bulanan",
+                        cta: "Mulakan Sekarang"
+                    },
+                    note: "Harga yang ditunjukkan adalah titik permulaan ilustrasi — boleh disesuaikan mengikut pasaran dan mata wang anda."
+                },
+                testimonials: {
+                    heading: "Apa Kata Pelanggan Kami",
+                    item1: { quote: "Brunouno membantu saya mendapatkan sistem pesanan dalam talian tanpa membayar komisen yang tinggi. Pelanggan tetap saya kini membuat pesanan awal dan saya jimat banyak masa semasa waktu sibuk makan tengah hari.", name: "En. Tan", business: "Tan's Wonton Noodles (Gerai Penjaja)" },
+                    item2: { quote: "Saya tidak pernah terfikir saya perlukan laman web sehingga Brunouno membinanya untuk saya dalam beberapa hari sahaja. Kini orang asing menemui saya di Google dan membuat pesanan sebelum saya pun buka kedai!", name: "Siti", business: "Dapur Siti (Berasaskan Rumah)" },
+                    item3: { quote: "Iklan Instagram kami akhirnya berkesan. Brunouno menyediakan semuanya dan menerangkan dengan bahasa yang mudah — tanpa istilah yang mengelirukan, hanya hasil sebenar.", name: "Marcus", business: "The Daily Grind Café" },
+                    item4: { quote: "Kami beralih daripada hanya halaman Facebook kepada kedai dalam talian sebenar. Pasukan Brunouno menjadikan keseluruhan proses mudah, dan pesanan dalam talian kami meningkat tiga kali ganda.", name: "Priya", business: "Priya's Boutique (Runcit)" },
+                    item5: { quote: "Pelanggan akhirnya dapat menemui kami di Google Maps dan menempah temujanji dalam talian. Brunouno menjadikan dunia digital tidak lagi menakutkan.", name: "Aisha", business: "Glow Beauty Studio (Salun Kecantikan)" }
+                },
+                faq: {
+                    heading: "Soalan Lazim",
+                    item1: { q: "Adakah saya perlu pengetahuan pengkodan?", a: "Tidak sama sekali. Kami uruskan semua kerja teknikal untuk anda — anda hanya perlu beritahu kami keperluan anda, dan kami akan membinanya." },
+                    item2: { q: "Berapa lama masa persediaan?", a: "Kebanyakan laman web dan sistem pesanan siap dalam 5–10 hari bekerja, bergantung kepada pelan yang anda pilih." },
+                    item3: { q: "Bolehkah anda memindahkan laman web saya yang sedia ada?", a: "Boleh! Kami boleh memindahkan kandungan dan reka bentuk sedia ada anda ke laman web baharu yang lebih pantas, berpatutan, dan mesra mudah alih." },
+                    item4: { q: "Berapakah kosnya?", a: "Pelan kami bermula daripada kadar bulanan yang berpatutan tanpa sebarang yuran tersembunyi. Lihat bahagian Harga di atas untuk maklumat lanjut." },
+                    item5: { q: "Apakah sokongan yang anda sediakan?", a: "Anda akan mempunyai akses kepada sokongan tempatan sebenar — melalui telefon, WhatsApp, atau emel — apabila anda memerlukan bantuan." }
+                },
+                contact: {
+                    heading: "Bersedia untuk Mengembangkan Perniagaan Anda Dalam Talian?",
+                    subheading: "Tempah konsultasi percuma dan biar kami membina kehadiran digital yang berpatutan untuk mengembangkan perniagaan anda — tanpa sebarang komitmen.",
+                    form: { name: "Nama", business: "Nama Perniagaan", email: "Emel", phone: "Nombor Telefon", message: "Mesej", submit: "Tempah Konsultasi Percuma Saya" },
+                    note: "Kami akan menghubungi anda dalam tempoh 1 hari bekerja.",
+                    thanks: "Terima kasih! Kami telah menerima maklumat anda dan akan menghubungi anda secepat mungkin."
+                },
+                footer: {
+                    tagline: "Membawa Setiap Perniagaan Dalam Talian. Membantu anda mencapai lebih banyak dengan lebih sedikit kerumitan.",
+                    product: "Produk", company: "Syarikat", legal: "Perundangan",
+                    prod: { features: "Perkhidmatan", integrations: "Cara Ia Berfungsi", pricing: "Harga" },
+                    companyLinks: { about: "Tentang Kami", careers: "Kerjaya", contact: "Hubungi Kami" },
+                    legalLinks: { terms: "Terma", privacy: "Privasi", security: "Keselamatan" },
+                    copyright: "© 2024 Brunouno Inc. Hak cipta terpelihara."
+                }
+            }
+        };
+
+        // map flat dotted keys (footer.company.about) to the nested dict shape above
+        function resolveKey(dict, key) {
+            const aliases = {
+                'footer.company.about': 'footer.companyLinks.about',
+                'footer.company.careers': 'footer.companyLinks.careers',
+                'footer.company.contact': 'footer.companyLinks.contact',
+                'footer.legal.terms': 'footer.legalLinks.terms',
+                'footer.legal.privacy': 'footer.legalLinks.privacy',
+                'footer.legal.security': 'footer.legalLinks.security'
+            };
+            const path = (aliases[key] || key).split('.');
+            return path.reduce((obj, k) => (obj && obj[k] !== undefined) ? obj[k] : null, dict);
+        }
+
+        function setLanguage(lang) {
+            const dict = translations[lang] || translations.en;
+            document.querySelectorAll('[data-i18n]').forEach(function (el) {
+                const key = el.getAttribute('data-i18n');
+                const text = resolveKey(dict, key);
+                if (text) el.textContent = text;
+            });
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+            document.getElementById('langLabel').textContent = lang.toUpperCase();
+            localStorage.setItem('brunouno_lang', lang);
+            document.getElementById('langDropdown').classList.add('hidden');
+        }
+
+        setLanguage(localStorage.getItem('brunouno_lang') || 'en');
+    </script>
+</body></html>
